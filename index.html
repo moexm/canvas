@@ -8,31 +8,25 @@
 </head>
 <body>
     
-    <div id="canvas"></div>
+    <canvas id="canvas" width="100" height="100"></div>
     
     <script>
+        const canvas = document.getElementById('canvas');
+        //让画布和文档的宽高一样
+        canvas.width=document.documentElement.clientWidth;
+        canvas.height=document.documentElement.clientHeight;
 
-         /*获得鼠标，平凡的操作DOM，这个代码并没有鼠标离开的场景*/
+        
+        const ctx = canvas.getContext('2d');
 
-        canvas.onmousemove = (e) => {
+        ctx.fillStyle = 'red';
+        //ctx.fillRect(0, 0, 100, 100);
+
+        //获取鼠标的坐标
+        canvas.onmousemove=(e)=>{
             console.log(e.clientX);
             console.log(e.clientY);
-            let div =document.createElement('div');
-            /*给div填上绝对定位和样式,div的内存在系统中，没有在画布上*/
-
-            div.style.position='absolute';
-            div.style.left=e.clientX+'px';
-            div.style.top=e.clientY+'px';
-            //div.style.border='1px solid red';
-            div.style.width='6px';
-            div.style.height='6px';
-            div.style.marginLeft="-3px";
-            div.style.marginTop="-3px";
-            div.style.borderRadius='50%';
-            div.style.backgroundColor='black';
-
-            /*add div into id="canvas"*/
-            canvas.appendChild(div);
+            ctx.fillRect(e.clientX-5,e.clientY-5,10,10);
 
         }
     </script>
