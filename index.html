@@ -22,12 +22,26 @@
         ctx.fillStyle = 'red';
         //ctx.fillRect(0, 0, 100, 100);
 
+
+        let painting =false;
+        canvas.onmousedown = () =>{
+            painting=true;
+        }
+
         //获取鼠标的坐标
         canvas.onmousemove=(e)=>{
-            console.log(e.clientX);
-            console.log(e.clientY);
-            ctx.fillRect(e.clientX-5,e.clientY-5,10,10);
 
+            if(painting===true) {
+            //console.log(e.clientX);
+            //console.log(e.clientY);
+                ctx.fillRect(e.clientX-5,e.clientY-5,10,10);
+            }else {
+                console.log('not in painting');
+            }
+        }
+
+        canvas.onmouseup=()=>{
+            painting=false;
         }
     </script>
         
