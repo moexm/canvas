@@ -4,15 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>持续学习</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     
     <div id="canvas"></div>
     
     <script>
+
+         /*获得鼠标*/
+
         canvas.onclick = (e) => {
-            console.log(e);
+            console.log(e.clientX);
+            console.log(e.clientY);
+            let div =document.createElement('div');
+            /*给div填上绝对定位和样式,div的内存在系统中，没有在画布上*/
+
+            div.style.position='absolute';
+            div.style.left=e.clientX+'px';
+            div.style.top=e.clientY+'px';
+            //div.style.border='1px solid red';
+            div.style.width='6px';
+            div.style.height='6px';
+            div.style.marginLeft="-3px";
+            div.style.marginTop="-3px";
+            div.style.borderRadius='50%';
+            div.style.backgroundColor='black';
+
+            /*add div into id="canvas"*/
+            canvas.appendChild(div);
+
         }
     </script>
         
