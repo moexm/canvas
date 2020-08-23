@@ -10,44 +10,63 @@
     
     <canvas id="canvas" width="100" height="100"></div>
     
+
+        
     <script>
         const canvas = document.getElementById('canvas');
         //让画布和文档的宽高一样
         canvas.width=document.documentElement.clientWidth;
-        canvas.height=document.documentElement.clientHeight;
-
-        
+        canvas.height=document.documentElement.clientHeight;    
         const ctx = canvas.getContext('2d');
 
         ctx.fillStyle = 'black';
         //ctx.fillRect(0, 0, 100, 100);
         ctx.strokeStyle='none';//这个没用
 
+
         let painting =false;
-        canvas.onmousedown = () =>{
-            painting=true;
-        }
-
-        //获取鼠标的坐标
-        canvas.onmousemove=(e)=>{
-
-            if(painting===true) {
-            //console.log(e.clientX);
-            //console.log(e.clientY);
-            //方形：ctx.fillRect(e.clientX-5,e.clientY-5,10,10);
+        var isTouchDevice = 'ontouchstart' in 
+        document.documentElement;
+        
+        if (isTouchDevice) {
             
-            ctx.beginPath();
-            ctx.arc(e.clientX,e.clientY,5,0,2*Math.PI);
-            ctx.stroke();
-            ctx.fill();
-                
-            }else {
-                console.log('not in painting');
-            }
-        }
+            canvas.ontouchmove =(e) =>{
+                let x=e.touches[0].clientX;
+                let y=e.touches[0].clientY;
 
-        canvas.onmouseup=()=>{
-            painting=false;
+                ctx.beginPath();
+                ctx.arc(x,y,5,0,2*Math.PI);
+                ctx.stroke();
+                ctx.fill();
+            
+            }
+        }else{
+        
+            canvas.onmousedown = () =>{
+                painting=true;
+            }
+            //获取鼠标的坐标
+            canvas.onmousemove=(e)=>{
+
+                if(painting===true) {
+                //console.log(e.clientX);
+                //console.log(e.clientY);
+                //方形：ctx.fillRect(e.clientX-5,e.clientY-5,10,10);
+                
+                ctx.beginPath();
+                ctx.arc(e.clientX,e.clientY,5,0,2*Math.PI);
+                ctx.stroke();
+                ctx.fill();
+                    
+                }else {
+                    console.log('not in painting');
+                }
+            }
+
+            canvas.onmouseup=()=>{
+                painting=false;
+            }
+
         }
     </script>
         
